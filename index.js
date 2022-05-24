@@ -9,23 +9,37 @@ app.post("/predict", async (req, res, next) => {
   try {
     console.log("REQ BODY", req.body);
     res.status(200).json({
-      fulfillmentMessages: [
-        {
-          text: {
-            text: ["Success"],
+      payload: {
+        google: {
+          expectUserResponse: true,
+          richResponse: {
+            items: [
+              {
+                simpleResponse: {
+                  textToSpeech: "Go to the doctor!",
+                },
+              },
+            ],
           },
         },
-      ],
+      },
     });
   } catch (error) {
     res.status(500).json({
-      fulfillmentMessages: [
-        {
-          text: {
-            text: ["failed"],
+      payload: {
+        google: {
+          expectUserResponse: true,
+          richResponse: {
+            items: [
+              {
+                simpleResponse: {
+                  textToSpeech: "Go to the doctor!",
+                },
+              },
+            ],
           },
         },
-      ],
+      },
     });
   }
 });
