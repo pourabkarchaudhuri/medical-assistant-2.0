@@ -19,6 +19,20 @@ app.post("/predict", async (req, res, next) => {
                   textToSpeech: "Go to the doctor!",
                 },
               },
+              {
+                card: {
+                  title: "card title",
+                  subtitle: "card text",
+                  imageUri: "https://example.com/images/example.png",
+                  buttons: [
+                    {
+                      text: "button text",
+                      postback:
+                        "https://example.com/path/for/end-user/to/follow",
+                    },
+                  ],
+                },
+              },
             ],
           },
         },
