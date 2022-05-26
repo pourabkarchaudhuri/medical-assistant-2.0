@@ -16,24 +16,31 @@ app.post("/predict", async (req, res, next) => {
             items: [
               {
                 simpleResponse: {
-                  textToSpeech: "Go to the doctor!",
+                  textToSpeech: "These are suggestion chips.",
                 },
               },
               {
-                card: {
-                  title: "card title",
-                  subtitle: "card text",
-                  imageUri: "https://example.com/images/example.png",
-                  buttons: [
-                    {
-                      text: "button text",
-                      postback:
-                        "https://example.com/path/for/end-user/to/follow",
-                    },
-                  ],
+                simpleResponse: {
+                  textToSpeech:
+                    "Which type of response would you like to see next?",
                 },
               },
             ],
+            suggestions: [
+              {
+                title: "Suggestion 1",
+              },
+              {
+                title: "Suggestion 2",
+              },
+              {
+                title: "Suggestion 3",
+              },
+            ],
+            linkOutSuggestion: {
+              destinationName: "Suggestion Link",
+              url: "https://assistant.google.com/",
+            },
           },
         },
       },
