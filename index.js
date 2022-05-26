@@ -16,25 +16,19 @@ app.post("/predict", async (req, res, next) => {
             items: [
               {
                 simpleResponse: {
-                  textToSpeech: "These are suggestion chips.",
-                },
-              },
-              {
-                simpleResponse: {
-                  textToSpeech:
-                    "Which type of response would you like to see next?",
+                  textToSpeech: "From how many days are you suffering?",
                 },
               },
             ],
             suggestions: [
               {
-                title: "Suggestion 1",
+                title: "1",
               },
               {
-                title: "Suggestion 2",
+                title: "2",
               },
               {
-                title: "Suggestion 3",
+                title: "3",
               },
             ],
             linkOutSuggestion: {
