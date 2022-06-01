@@ -1,64 +1,36 @@
 const express = require("express");
+const bodyParser = require("body-parser");
+const compression = require("compression");
+const morgan = require("morgan");
+//env
+const dotenv = require("dotenv");
+dotenv.config();
+
+//port assignment 3000
+const staticPort = 3000
+const port = process.env.PORT || staticPort;
+
+// we will create these routes in the future
+const routes = require("./routes/diagnosisRoutes");
 
 const app = express();
-const port = process.env.PORT || 4000;
 
-app.use(express.json());
+// middleware to convert our request data into JSON format
+app.use(bodyParser.json())
+app.use(compression())
+app.use(morgan('common'));
+// include the userRoutes
+app.use("/api/v1", routes);
 
-app.post("/predict", async (req, res, next) => {
-  try {
-    console.log("REQ BODY", req.body);
-    res.status(200).json({
-      payload: {
-        google: {
-          expectUserResponse: true,
-          richResponse: {
-            items: [
-              {
-                simpleResponse: {
-                  textToSpeech: "From how many days are you suffering?",
-                },
-              },
-            ],
-            suggestions: [
-              {
-                title: "1",
-              },
-              {
-                title: "2",
-              },
-              {
-                title: "3",
-              },
-            ],
-            linkOutSuggestion: {
-              destinationName: "Suggestion Link",
-              url: "https://assistant.google.com/",
-            },
-          },
-        },
-      },
+app.get('/', (req, res)=>
+{
+    res.send({
+      status: 200,
+      message: "Online",
+      uptime: process.uptime()
     });
-  } catch (error) {
-    res.status(500).json({
-      payload: {
-        google: {
-          expectUserResponse: true,
-          richResponse: {
-            items: [
-              {
-                simpleResponse: {
-                  textToSpeech: "Go to the doctor!",
-                },
-              },
-            ],
-          },
-        },
-      },
-    });
-  }
-});
+})  
 
 app.listen(port, () => {
-  console.log(`Listening on port: ${port}`);
+  console.log(`Server is running on port ${port}`);
 });
